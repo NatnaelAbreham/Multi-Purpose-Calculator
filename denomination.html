@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./image/internal.png" type="image/x-icon" />
+    <title>Calculator</title>
+    <link href="./css/bootstrap.min.css" rel="stylesheet" />
+    <link href="./icons/bootstrap-icons.min.css" rel="stylesheet" />
+    <!-- <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    /> -->
+    <!-- Tailwind (CDN) -->
+    <script src="./javascript/tailwindcss.js"></script>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/denomination.css" />
+    <script>
+      const savedTheme = localStorage.getItem("theme") || "dark";
+      document.documentElement.setAttribute("data-bs-theme", savedTheme);
+    </script>
+  </head>
+  <body>
+    <div class="d-app">
+      <!-- Hamburger button (visible on small screens) -->
+      <button
+        class="btn btn-outline-secondary d-md-none m-3 position-absolute top-0 start-0 z-3"
+        onclick="toggleSidebar()"
+      >
+        <i class="bi bi-list" id="hamburgerIcon"></i>
+      </button>
+
+      <!-- =====  Sidebar  ===== -->
+      <nav class="sidebar d-none d-md-block" id="sidebar">
+        <h4>Tools</h4>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" href="./denomination.html">
+              <i class="bi bi-cash-coin"></i> Denomination
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./currencyexchange.html">
+              <i class="bi bi-currency-exchange"></i> currencyexchange
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./runup.html">
+              <i class="bi bi-speedometer2"></i> RunUp
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./agecalculator.html">
+              <i class="bi bi-calendar3"></i> Age Calculator
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./calendarconversion.html">
+              <i class="bi bi-calendar4-range"></i> Date Conversion
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./scientficcalculator.html">
+              <i class="bi bi-calculator"></i> Scientific Calculator
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- =====  Main Content  ===== -->
+      <main
+        class="main-content d-flex flex-grow-1 justify-content-center align-items-center position-relative"
+      >
+        <button
+          id="themeToggle"
+          class="togglebtn btn btn-outline-light position-absolute top-0 end-0 m-3"
+          onclick="toggleTheme()"
+          title="Toggle theme"
+        >
+          <i id="themeIcon" class="bi bi-moon-fill"></i>
+        </button>
+
+        <div class="calculator">
+          <h2 class="text-3xl font-bold text-center mb-6">
+            Birr Note Calculator
+          </h2>
+          <form id="noteForm" class="space-y-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="input-box">
+                <label for="note200" class="block text-sm font-semibold mb-1"
+                  >200 Birr Notes</label
+                >
+                <input
+                  type="number"
+                  id="note200"
+                  class="form-control"
+                  min="0"
+                  step="1"
+                  value="0"
+                />
+              </div>
+              <div class="input-box">
+                <label for="note100" class="block text-sm font-semibold mb-1"
+                  >100 Birr Notes</label
+                >
+                <input
+                  type="number"
+                  id="note100"
+                  class="form-control"
+                  min="0"
+                  step="1"
+                  value="0"
+                />
+              </div>
+              <div class="input-box">
+                <label for="note50" class="block text-sm font-semibold mb-1"
+                  >50 Birr Notes</label
+                >
+                <input
+                  type="number"
+                  id="note50"
+                  class="form-control"
+                  min="0"
+                  step="1"
+                  value="0"
+                />
+              </div>
+              <div class="input-box">
+                <label for="note10" class="block text-sm font-semibold mb-1"
+                  >10 Birr Notes</label
+                >
+                <input
+                  type="number"
+                  id="note10"
+                  class="form-control"
+                  min="0"
+                  step="1"
+                  value="0"
+                />
+              </div>
+              <div class="input-box">
+                <label for="note5" class="block text-sm font-semibold mb-1"
+                  >5 Birr Notes</label
+                >
+                <input
+                  type="number"
+                  id="note5"
+                  class="form-control"
+                  min="0"
+                  step="1"
+                  value="0"
+                />
+              </div>
+              <div class="input-box">
+                <label for="note1" class="block text-sm font-semibold mb-1"
+                  >1 Birr Notes</label
+                >
+                <input
+                  type="number"
+                  id="note1"
+                  class="form-control"
+                  min="0"
+                  step="1"
+                  value="0"
+                />
+              </div>
+            </div>
+            <button
+              type="reset"
+              id="resetBtn"
+              class="btn btn-secondary w-full py-2 text-lg shadow-md rounded-xl mt-2"
+            >
+              Reset
+            </button>
+          </form>
+          <div
+            class="mt-5 text-center font-semibold rounded-lg py-2 px-3 shadow-sm"
+            id="totalWrapper"
+          >
+            Total Amount: <span id="totalDisplay">0.00</span> ETB
+          </div>
+        </div>
+      </main>
+    </div>
+    <script src="./javascript/bootstrap.bundle.min.js"></script>
+    <script src="./javascript/script.js"></script>
+    <script src="./javascript/denomination.js"></script>
+  </body>
+</html>

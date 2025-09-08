@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./image/internal.png" type="image/x-icon" />
+    <title>Calculator</title>
+    <link href="./css/bootstrap.min.css" rel="stylesheet" />
+    <link href="./icons/bootstrap-icons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/dateconversion.css" />
+    <script>
+      const savedTheme = localStorage.getItem("theme") || "dark";
+      document.documentElement.setAttribute("data-bs-theme", savedTheme);
+    </script>
+  </head>
+  <body>
+    <div class="d-app">
+      <!-- Hamburger button (visible on small screens) -->
+      <button
+        class="btn btn-outline-secondary d-md-none m-3 position-absolute top-0 start-0 z-3"
+        onclick="toggleSidebar()"
+      >
+        <i class="bi bi-list" id="hamburgerIcon"></i>
+      </button>
+
+      <!-- =====  Sidebar  ===== -->
+      <nav class="sidebar d-none d-md-block" id="sidebar">
+        <h4>Tools</h4>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" href="./denomination.html">
+              <i class="bi bi-cash-coin"></i> Denomination
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./currencyexchange.html">
+              <i class="bi bi-currency-exchange"></i> currencyexchange
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./runup.html">
+              <i class="bi bi-speedometer2"></i> RunUp
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./agecalculator.html">
+              <i class="bi bi-calendar3"></i> Age Calculator
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./calendarconversion.html">
+              <i class="bi bi-calendar4-range"></i> Date Conversion
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./scientficcalculator.html">
+              <i class="bi bi-calculator"></i> Scientific Calculator
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- =====  Main Content  ===== -->
+      <main
+        class="main-content d-flex flex-grow-1 justify-content-center align-items-center position-relative"
+      >
+        <button
+          id="themeToggle"
+          class="togglebtn btn btn-outline-light position-absolute top-0 end-0 m-3"
+          onclick="toggleTheme()"
+          title="Toggle theme"
+        >
+          <i id="themeIcon" class="bi bi-moon-fill"></i></button
+        ><br /><br />
+        <div class="container py-5">
+          <div class="card p-4 mx-auto" style="max-width: 600px">
+            <h3 class="text-center mb-4">Converter (Gregorian / Ethiopian)</h3>
+
+            <div
+              id="errorMsg"
+              class="alert alert-danger d-none"
+              role="alert"
+            ></div>
+
+            <div class="mb-3">
+              <label for="calendarType" class="form-label">Calendar Type</label>
+              <select class="form-select" id="calendarType">
+                <option value="gregorian">Gregorian</option>
+                <option value="ethiopian">Ethiopian</option>
+              </select>
+            </div>
+
+            <div class="mb-3 calendar-input" id="gregorianInput">
+              <label for="gregDate" class="form-label">Date (Gregorian)</label>
+              <input type="date" id="gregDate" class="form-control" max="" />
+            </div>
+
+            <div class="calendar-input hidden" id="ethiopianInput">
+              <label class="form-label">Date (Ethiopian)</label>
+              <div class="row">
+                <div class="col-4">
+                  <select id="ethDay" class="form-select"></select>
+                </div>
+                <div class="col-4">
+                  <select id="ethMonth" class="form-select">
+                    <!-- <option value="1">Meskerem</option>
+                    <option value="2">Tikimt</option>
+                    <option value="3">Hidar</option>
+                    <option value="4">Tahsas</option>
+                    <option value="5">Tir</option>
+                    <option value="6">Yekatit</option>
+                    <option value="7">Megabit</option>
+                    <option value="8">Miazia</option>
+                    <option value="9">Ginbot</option>
+                    <option value="10">Sene</option>
+                    <option value="11">Hamle</option>
+                    <option value="12">Nehase</option>
+                    <option value="13">Pagume</option> -->
+
+                    <option value="1">መስከረም</option>
+                    <option value="2">ጥቅምት</option>
+                    <option value="3">ኅዳር</option>
+                    <option value="4">ታህሳስ</option>
+                    <option value="5">ጥር</option>
+                    <option value="6">የካቲት</option>
+                    <option value="7">መጋቢት</option>
+                    <option value="8">ሚያዝያ</option>
+                    <option value="9">ግንቦት</option>
+                    <option value="10">ሰኔ</option>
+                    <option value="11">ሐምሌ</option>
+                    <option value="12">ነሐሴ</option>
+                    <option value="13">ጳጉሜ</option>
+                  </select>
+                </div>
+                <div class="col-4">
+                  <select id="ethYear" class="form-select"></select>
+                </div>
+              </div>
+            </div>
+            <p></p>
+            <!--  <button class="btn btn-calculate" onclick="calculateAge()">
+          Calculate Age
+        </button> -->
+            <button
+              class="btn btn-primary w-100 btn-lg"
+              onclick="calculateAge()"
+            >
+              Calculate
+            </button>
+          </div>
+        </div>
+
+        <!-- Result Modal -->
+        <div class="modal fade popup-modal" id="resultModal" tabindex="-1">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-center">
+              <h5 id="datetitle">
+                <i class="bi bi-hourglass-split me-2"></i>Your Age
+              </h5>
+
+              <div class="d-flex justify-content-around py-3">
+                <div>
+                  <h1 id="yearsOut" class="fw-bold text-warning">0</h1>
+                  <span class="small">Years</span>
+                </div>
+                <div>
+                  <h1 id="monthsOut" class="fw-bold text-success">0</h1>
+                  <span class="small">Months</span>
+                </div>
+                <div>
+                  <h1 id="daysOut" class="fw-bold text-info">0</h1>
+                  <span class="small">Days</span>
+                </div>
+              </div>
+              <!-- <p id="textualOutput" class="age-text"></p> -->
+              <button
+                id="okBtn"
+                class="btn btn-secondary mt-2"
+                data-bs-dismiss="modal"
+              >
+                Ok
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script src="./javascript/bootstrap.bundle.min.js"></script>
+    <script src="./javascript/script.js"></script>
+    <script src="./javascript/dateutility.js"></script>
+    <script src="./javascript/dateconversion1.js"></script>
+  </body>
+</html>

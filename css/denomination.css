@@ -1,0 +1,50 @@
+/* ───────────────────────────────────────────────
+   1.  Extend the variable palette
+   ─────────────────────────────────────────────── */
+
+/* Calculator wrapper */
+.calculator {
+  max-width: 32rem;
+  margin: auto;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  background: var(--calc-bg);
+  color: var(--calc-text);
+  box-shadow: var(--calc-shadow);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Display / input area */
+.input-box {
+  border-radius: 1rem;
+  padding: 1rem;
+  background: var(--calc-input-bg);
+  color: var(--calc-input-text);
+  box-shadow: var(--calc-input-shadow);
+  transition: transform 0.2s, background-color 0.3s, color 0.3s;
+}
+
+.input-box:hover {
+  transform: scale(1.02);
+}
+
+/* Remove spinners from number inputs (unchanged) */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Number‑field colours */
+input[type="number"] {
+  background: var(--calc-input-bg);
+  color: var(--calc-input-text);
+}
+
+#totalWrapper {
+  background-color: var(--total-bg);
+  color: var(--total-text);
+  box-shadow: var(--total-shadow);
+  font-size: var(--total-font-size);
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+}

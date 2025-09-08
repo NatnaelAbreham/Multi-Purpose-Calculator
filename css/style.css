@@ -1,0 +1,183 @@
+:root {
+  /* surface + typography */
+  --bg-body: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  --text-color: #222;
+
+  /* sidebar */
+  --sidebar-bg: #ffffff;
+  --sidebar-text: #333;
+  --sidebar-hover-bg: #e7e7e7;
+  --sidebar-hover-text: #0d6efd;
+  --sidebar-accent: #0d6efd;
+
+  /* calculator buttons */
+  --btn-bg: linear-gradient(145deg, #e0e0e0, #ffffff);
+  --btn-shadow: 5px 5px 10px #d1d1d1, -5px -5px 10px #ffffff;
+  --btn-inner-shadow: inset 2px 2px 5px #d1d1d1, inset -2px -2px 5px #ffffff;
+
+  /* frosted‑glass card */
+  --glass-bg: rgba(255, 255, 255, 0.6);
+
+  /* denomination */
+
+  --calc-bg: #ffffff;
+  --calc-text: #1f2937;
+  --calc-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  --calc-input-bg: #ffffff;
+  --calc-input-text: #1f2937;
+  --calc-input-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  --total-bg: #f0fdf4;
+  --total-text: #047857;
+  --total-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  --total-font-size: 1.1rem;
+}
+
+[data-bs-theme="dark"] {
+  --bg-body: #1f2937;
+  /* #111827 */
+  --text-color: #f1f1f1;
+
+  --sidebar-bg: #212529;
+  --sidebar-text: #f8f9fa;
+  --sidebar-hover-bg: #343a40;
+  --sidebar-hover-text: #0dcaf0;
+  --sidebar-accent: #0dcaf0;
+
+  --btn-bg: linear-gradient(145deg, #1e1e1e, #2d2d2d);
+  --btn-shadow: 5px 5px 10px #0a0a0a, -5px -5px 10px #2f2f2f;
+  --btn-inner-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.7),
+    inset -2px -2px 4px rgba(80, 80, 80, 0.2);
+
+  --glass-bg: rgba(100, 100, 100, 0.25);
+
+  /* denomination */
+
+  /* …existing dark‑sidebar / button / glass overrides … */
+
+  /* ── calculator (dark mode overrides) */
+  --calc-bg: #1f2937; /* container background */
+  --calc-text: #f9fafb;
+  --calc-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+
+  --calc-input-bg: #374151;
+  --calc-input-text: #f9fafb;
+  --calc-input-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
+
+  --total-bg: #064e3b;
+  --total-text: #a7f3d0;
+  --total-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  --total-font-size: 1.1rem;
+}
+/* the body takes user defined variable --sidebar is user defined variable  */
+body {
+  background: var(--bg-body);
+  color: var(--text-color);
+  transition: background 0.4s, color 0.4s;
+}
+
+.d-app {
+  display: flex; /* just like box all container place next to each other */
+  height: 100vh;
+  overflow: hidden; /* this mean it cut of if the content more than the screen or doesn't allow scrollable */
+}
+.main-content {
+  flex-grow: 1; /* used to fill all available space */
+  overflow-y: auto; /* y mean scroll vertically  */
+}
+
+.sidebar {
+  max-width: 260px;
+  width: 100%;
+  flex: 0 0 auto;
+  background: var(--sidebar-bg);
+  padding: 28px 22px;
+  transition: transform 0.3s ease-in-out;
+  z-index: 2;
+  height: 100vh;
+  position: absolute; /* or fixed if you want overlay on top of content */
+  top: 0;
+  left: 0;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+/* Hide sidebar by sliding it left */
+.sidebar.collapsed {
+  transform: translateX(-100%);
+}
+.sidebar h4 {
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: var(--sidebar-text);
+}
+.sidebar .nav-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.55rem 1rem 0.55rem 1.25rem;
+  font-weight: 500;
+  border-radius: 0.6rem;
+  color: var(--sidebar-text);
+  transition: color 0.3s, background 0.3s, transform 0.3s;
+}
+.sidebar .nav-link i {
+  font-size: 1.15rem;
+}
+
+.sidebar .nav-link::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 0;
+  background: var(--sidebar-accent);
+  border-radius: 0 4px 4px 0;
+  transition: height 0.3s;
+}
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+  background: var(--sidebar-hover-bg);
+  color: var(--sidebar-hover-text);
+  transform: translateX(6px);
+  text-decoration: none;
+}
+
+.sidebar .nav-link:hover::before,
+.sidebar .nav-link.active::before {
+  height: 74%;
+}
+.togglebtn {
+  margin-top: 1.25rem;
+  padding: 0.85rem 1rem;
+  font-size: 1.1rem;
+  border-radius: 14px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #0d9488, #14b8a6); /* teal shades */
+  border: none;
+  color: #ffffff;
+  box-shadow: 0 6px 15px rgba(20, 184, 166, 0.6);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
+.togglebtn:hover {
+  background: linear-gradient(135deg, #14b8a6, #0d9488);
+  box-shadow: 0 8px 25px rgba(20, 184, 166, 0.8);
+}
+
+.togglebtn:active {
+  transform: scale(0.97);
+  box-shadow: 0 4px 10px rgba(20, 184, 166, 0.7);
+}
+
+@media (min-width: 768px) {
+  .sidebar {
+    transform: none !important; /* ensure visible on desktop */
+    position: relative; /* part of layout */
+  }
+}
